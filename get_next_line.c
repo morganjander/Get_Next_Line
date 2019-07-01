@@ -30,9 +30,26 @@ static t_list	*getfile(t_list **file, int fd)
 	return (tmp);
 }
 
-int				get_next_line(const char fd, char **line)
+char *ft_copyuntil(char *src, char c)
 {
-	char			buf(BUFF_SIZE + 1);
+	char *str;
+	int i = 0;
+
+	while (src[i] != c)
+		i++;
+	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	str[i] = '\0';
+	while (--i >= 0)
+	{
+		str[i] = src[i];
+	}
+	return (str);
+}
+
+int				get_next_line(const int fd, char **line)
+{
+	char			*buf(BUFF_SIZE + 1);
 	static t_list	*file;
 	t_list			*curr;
 	int				i;
@@ -46,7 +63,7 @@ int				get_next_line(const char fd, char **line)
 		buf[ret] = '\0';
 		curr->content = ft_strjoin(curr->content, buf);
 		if (ft_strchr(buf, '\n'))
-			break ;
+			 ;
 	}
 	if (ret < BUFF_SIZE && ret != ft_strlen(curr->content))
 		return (0);
