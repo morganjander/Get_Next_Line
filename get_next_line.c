@@ -6,7 +6,7 @@
 /*   By: mjander <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:52:13 by mjander           #+#    #+#             */
-/*   Updated: 2019/07/02 10:48:47 by mjander          ###   ########.fr       */
+/*   Updated: 2019/07/04 13:49:32 by mjander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 #include <stdio.h>
 
 /*
-returns the correct node in the list of files, 
-using content_size as an identifier. Creates a
-new node with an empty string if one with the
-correct fd does not exist
+** returns the correct node in the list of files,
+** using content_size as an identifier. Creates a
+** new node with an empty string if one with the
+** correct fd does not exist
 */
 
 static t_list	*getfile(t_list **files, int fd)
@@ -45,16 +45,16 @@ static t_list	*getfile(t_list **files, int fd)
 }
 
 /*
-reads from the fd into the buffer, then assigns
-the content of buffer into the saved string,
-until the saved string contains a newline
-character.
- */
+** reads from the fd into the buffer, then assigns
+** the content of buffer into the saved string,
+** until the saved string contains a newline
+** character.
+*/
 
 void			read_until(int fd, char **saved)
 {
-	char 	buf[BUFF_SIZE + 2];
-	char 	*tmp;
+	char	buf[BUFF_SIZE + 2];
+	char	*tmp;
 	int		ret;
 
 	while (!(ft_strchr(*saved, '\n')))
@@ -72,24 +72,24 @@ void			read_until(int fd, char **saved)
 }
 
 /*
-checks if the 1st char of the saved sting is the eof character
-(reached the end of the file, so returns 0)
-assigns a ptr to the newline char in the saved string,
-replaces it with null, copies the string up until null
-into the line, then frees string and copies whatever 
-is after null (newline) back into the string.
- */
+** checks if the 1st char of the saved sting is the eof character
+** (reached the end of the file, so returns 0)
+** assigns a ptr to the newline char in the saved string,
+** replaces it with null, copies the string up until null
+** into the line, then frees string and copies whatever
+** is after null (newline) back into the string.
+*/
 
 int				ft_getline(char **saved, char **line)
 {
-	char 	*tmp;
-	char 	*ptr;
-	char 	*eof;
+	char	*tmp;
+	char	*ptr;
+	char	*eof;
 
 	if ((*saved)[0] == 3)
 		return (0);
 	if ((eof = ft_strchr(*saved, 3)))
-		if(!(ft_strchr(*saved, '\n')))
+		if (!(ft_strchr(*saved, '\n')))
 			*eof = '\n';
 	tmp = ft_strdup(*saved);
 	ptr = ft_strchr(tmp, '\n');
@@ -109,6 +109,6 @@ int				get_next_line(const int fd, char **line)
 	if (fd < 0 || !line || (read(fd, 0, 0) < 0))
 		return (-1);
 	curr = getfile(&files, fd);
-	read_until(fd,(char **)&curr->content);
+	read_until(fd, (char **)&curr->content);
 	return (ft_getline((char **)&curr->content, line));
 }
