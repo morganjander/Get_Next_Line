@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "Libft-Project/libft/libft.h"
 #include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/uio.h>
