@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjander <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/20 10:54:04 by mjander           #+#    #+#             */
-/*   Updated: 2019/06/29 13:16:32 by mjander          ###   ########.fr       */
+/*   Created: 2019/06/10 07:40:26 by mjander           #+#    #+#             */
+/*   Updated: 2019/06/19 14:42:48 by mjander          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 4
+void	ft_putnbr_fd(int n, int fd)
+{
+	unsigned int i;
 
-int get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	i = (unsigned int)n;
+	if (i < 10)
+		ft_putchar_fd(i + 48, fd);
+	else
+	{
+		ft_putnbr_fd(i / 10, fd);
+		ft_putchar_fd(i % 10 + 48, fd);
+	}
+}
